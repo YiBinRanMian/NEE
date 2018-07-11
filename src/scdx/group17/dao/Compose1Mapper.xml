@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scdx.group17.dao.Compose1Mapper">
+    <resultMap id="Compose1ResultMap" type="scdx.group17.entity.Compose1">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="qID" property="qID" jdbcType="INTEGER"/>
+        <id column="hID" property="hID" jdbcType="INTEGER"/>
+
+    </resultMap>
+    <!--Get By pID-->
+    <select id="getById" resultMap="Compose1ResultMap">
+        SELECT * FROM compose1 WHERE hID = #{hID}
+    </select>
+</mapper>

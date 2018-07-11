@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scdx.group17.dao.QuestionMapper">
+    <resultMap id="QuestionResultMap" type="scdx.group17.entity.Question">
+        <id column="qID" property="qID" jdbcType="INTEGER"/>
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="tea_id" property="tea_id" jdbcType="INTEGER"/>
+        <result column="category" property="category" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="CLOB"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="isreleased" property="isreleased" jdbcType="TINYINT"/>
+        <result column="optionA" property="optionA" jdbcType="VARCHAR"/>
+        <result column="optionB" property="optionB" jdbcType="VARCHAR"/>
+        <result column="optionC" property="optionC" jdbcType="VARCHAR"/>
+        <result column="optionD" property="optionD" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--Get By Id-->
+    <select id="getByQid" resultMap="QuestionResultMap">
+        SELECT * FROM question WHERE qID = #{qID}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scdx.group17.dao.DoMapper">
+    <resultMap id="DoResultMap" type="scdx.group17.entity.Do">
+        <id column="hom_id" property="hom_id" jdbcType="INTEGER"/>
+        <id column="hID" property="hID" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="deadline" property="deadline" jdbcType="TIMESTAMP"/>
+        <result column="grade" property="grade" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--Get By Id-->
+    <select id="getAllDoById" resultMap="DoResultMap">
+        SELECT * FROM do WHERE id = #{id} ORDER BY deadline DESC
+    </select>
+    <!--Get DoneCount By Id-->
+    <select id="getDoneCountById" resultType="java.lang.Integer">
+        SELECT count(*) FROM do WHERE id = #{id} AND grade >= 0
+    </select>
+    <!--Get UnDoneCount By Id-->
+    <select id="getUnDoneCountById" resultType="java.lang.Integer">
+        SELECT count(*) FROM do WHERE id = #{id} AND grade = -1
+    </select>
+    <select id="getsomeUnDoneByStuId" resultMap="DoResultMap">
+        SELECT * FROM do WHERE title LIKE '%${query}%' AND grade = -1 AND id = #{id} ORDER BY deadline DESC
+    </select>
+    <select id="getsomeDoneByStuId" resultMap="DoResultMap">
+        SELECT * FROM do WHERE title LIKE '%${query}%' AND grade >= 0 AND id = #{id} ORDER BY deadline DESC
+    </select>
+    <select id="getByHid" resultMap="DoResultMap">
+        SELECT * FROM do WHERE hID = #{hID} AND id = #{id}
+    </select>
+    <select id="getsomeUnDoneByTechId" resultMap="DoResultMap">
+        SELECT * FROM do WHERE title LIKE '%${query}%' AND hom_id = #{hom_id} AND grade = -1 ORDER BY deadline DESC
+    </select>
+    <select id="getsomeDoneByTechId" resultMap="DoResultMap">
+        SELECT * FROM do WHERE title LIKE '%${query}%' AND hom_id = #{hom_id} AND grade >=0 ORDER BY deadline DESC
+    </select>
+    <select id="getAllDoByHomId" resultMap="DoResultMap">
+        SELECT * FROM do WHERE hom_id=#{hom_id} ORDER BY deadline DESC
+    </select>
+</mapper>
