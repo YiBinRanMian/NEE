@@ -15,4 +15,11 @@ public interface UserMapper {
     public List<User> getAllUser();
 
     public User getById(@Param("id")Integer id);
+
+    /*增加用户(主键id手动输入)*/
+    public void addUser(@Param("id")Integer id,@Param("password")String password,@Param("gender")String gender,@Param("role")String role,@Param("name")String name);
+    /*查找并删除用户*/
+    public List<User> getUser(@Param("query")String query);
+    public void delUser(@Param("id")Integer id);
+    public void updateUser(@Param("id")Integer id,@Param("password")String password,@Param("gender")String gender,@Param("role")String role,@Param("name")String name);
 }

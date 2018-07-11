@@ -88,6 +88,13 @@ public class UserController {
         else if(role.equals("group")) re = "indexgroup";
         else if (role.equals("editor")) re = "indexeditor";
         else if (role.equals("reviewer")) re = "indexreviewer";
+        else if (role.equals("useradmin")) {
+            re = "useradmin";
+            User useradmin = userService.getById(uid);
+            model.addAttribute("one",useradmin);
+            List<User> users = userService.getAllUser();
+            model.addAttribute("list",users);
+        }
         else if (role.equals("student")) {
             re = "indexstudent";
 
@@ -155,5 +162,29 @@ public class UserController {
         User user = userService.getById(id);
         model.addAttribute("one",user);
         return "User";
+    }
+    @RequestMapping("/edit.do")
+    public String editUser(HttpSession session,Model model,Integer id){
+        String s = session.getAttribute("one").toString();
+        int ibindex = s.indexOf("id=")+3;
+        int ieindex = s.indexOf(",");
+        Integer uid = Integer.parseInt(s.substring(ibindex,ieindex));
+        User user = userService.getById(id);
+        model.addAttribute("edited",user);
+        return "edituser";
+    }
+    @RequestMapping("/esubmit.do")
+    public String esubmit(String id,String password,String name,String optionsRadios,String role,String confirm){
+        Integer uid = Integer.parseInt(id);
+        if (confirm.equals("agree"))
+            userService.updateUser(uid,password,optionsRadios,role,name);
+        return "redirect:/user/login.do";
+    }
+
+    @RequestMapping("/delete.do")
+    public String deleteUser(String id){
+        Integer uid = Integer.parseInt(id);
+        userService.delUser(uid);
+        return "redirect:/user/login.do";
     }
 }

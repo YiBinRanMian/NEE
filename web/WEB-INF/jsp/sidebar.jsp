@@ -52,4 +52,12 @@
             <li><a href="${pageContext.request.contextPath}/FileUpload/getAllFiles.do"><i class="icon-bar-chart"></i>查看课件</a></li>
         </ul>
     </c:if>
+
+    <c:if test="${one.role eq 'useradmin'}">
+    <ul id="nav">
+        <li><a href="${pageContext.request.contextPath}/user/login.do" class="open"><i class="icon-home"></i> 用户管理</a>
+
+    </ul>
+
+    </c:if>
 </div>

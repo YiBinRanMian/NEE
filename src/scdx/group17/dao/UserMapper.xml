@@ -20,5 +20,17 @@
     <select id="getById" resultMap="UserResultMap">
         SELECT * FROM user WHERE id = #{id}
     </select>
-
+    <insert id="addUser" parameterType="scdx.group17.entity.User">
+        INSERT INTO user(id,password,gender,role,name) VALUES (#{id},#{password},#{gender},#{role},#{name})
+    </insert>
+    <select id="getUser" parameterType="String" resultMap="UserResultMap">
+        SELECT * FROM user
+        WHERE id like '%${query}%' or name like '%${query}%' or gender LIKE '%${query}%' or role LIKE '%${query}%'
+    </select>
+    <select id="delUser" parameterType="scdx.group17.entity.User">
+        DELETE FROM user WHERE id = #{id}
+    </select>
+    <update id="updateUser" parameterType="scdx.group17.entity.User">
+        UPDATE user SET password = #{password}, gender = #{gender}, name = #{name},role = #{role} WHERE id = #{id}
+    </update>
 </mapper>
