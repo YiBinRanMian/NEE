@@ -36,6 +36,8 @@ public class UserController {
     private PostService postService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private TeachService teachService;
 
     @RequestMapping("/login.do")
     public String login(Model model, HttpSession session, HttpServletRequest request, String id, String password){
@@ -174,17 +176,57 @@ public class UserController {
         return "edituser";
     }
     @RequestMapping("/esubmit.do")
-    public String esubmit(String id,String password,String name,String optionsRadios,String role,String confirm){
+    public String esubmit(String id,String password,String name,String optionsRadios,String role,String subject,String confirm){
         Integer uid = Integer.parseInt(id);
         if (confirm.equals("agree"))
-            userService.updateUser(uid,password,optionsRadios,role,name);
+            userService.updateUser(uid,password,optionsRadios,role,name,subject);
         return "redirect:/user/login.do";
     }
 
     @RequestMapping("/delete.do")
     public String deleteUser(String id){
         Integer uid = Integer.parseInt(id);
+        User user = userService.getById(uid);
+        if (user.getRole().equals("teacher") || user.getRole().equals("tgroup")|| user.getRole().equals("editor")|| user.getRole().equals("reviewer")){
+
+            return "alert";
+        }
+        else if(user.getRole().equals("student")){
+            examService.delByStuId(uid);
+            doService.delByStuId(uid);
+            teachService.delByStuId(uid);
+        }
         userService.delUser(uid);
+        return "redirect:/user/login.do";
+    }
+
+    @RequestMapping("/add.do")
+    public String addUser(String addid,String addpassword,String addname,String addgender,String addrole,String addsubject){
+        System.out.println("添加信息："+addid+addpassword+addname+addgender+addrole);
+        Integer uid = Integer.parseInt(addid);
+        userService.addUser(uid,addpassword,addgender,addrole,addname,addsubject);
+        if(addrole.equals("student"))  studentService.addUser(uid,addpassword,addgender,addrole,addname);
+        else if(addrole.equals("teacher")) teacherService.addUser(uid,addpassword,addgender,addrole,addname,addsubject);
+        return "redirect:/user/login.do";
+    }
+    @RequestMapping("/delUsers.do")
+    public String delUsers(String[] boxes){
+        if(boxes!=null){
+            for (String temp:boxes){
+                Integer uid = Integer.parseInt(temp);
+                User user = userService.getById(uid);
+                if (user.getRole().equals("teacher") || user.getRole().equals("tgroup")|| user.getRole().equals("editor")|| user.getRole().equals("reviewer")){
+                    return "alert";
+                }
+                if(user.getRole().equals("student")){
+                    examService.delByStuId(uid);
+                    doService.delByStuId(uid);
+                    teachService.delByStuId(uid);
+                }
+                userService.delUser(uid);
+            }
+        }
+
         return "redirect:/user/login.do";
     }
 }

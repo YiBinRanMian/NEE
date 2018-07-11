@@ -13,5 +13,10 @@
     <select id="getById" resultMap="StudentResultMap">
         SELECT * FROM student WHERE id = #{id}
     </select>
-
+    <insert id="addUser" parameterType="scdx.group17.entity.Student">
+        INSERT INTO student(id,password,gender,role,name) VALUES (#{id},#{password},#{gender},#{role},#{name})
+    </insert>
+    <update id="updateUser" parameterType="scdx.group17.entity.Student">
+        UPDATE student SET password = #{password}, gender = #{gender}, name = #{name},role = #{role} WHERE id = #{id}
+    </update>
 </mapper>

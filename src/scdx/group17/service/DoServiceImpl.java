@@ -57,4 +57,9 @@ public class DoServiceImpl implements DoService{
     public List<Do> getAllDoByHomId(Integer hom_id) {
         return doMapper.getAllDoByHomId(hom_id);
     }
+
+    @Override
+    public void delByStuId(Integer id) {
+        doMapper.delByStuId(id);
+    }
 }

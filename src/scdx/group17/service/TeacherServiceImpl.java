@@ -14,4 +14,10 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher getById(Integer id) {
         return teacherMapper.getById(id);
     }
+    public void addUser(Integer id, String password, String gender, String role, String name,String subject) {
+        teacherMapper.addUser(id,password,gender,role,name,subject);
+    }
+    public void updateUser(Integer id,String password, String gender, String role, String name,String subject) {
+        teacherMapper.updateUser(id,password, gender, role, name,subject);
+    }
 }

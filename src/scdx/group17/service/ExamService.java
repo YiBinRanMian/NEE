@@ -10,4 +10,7 @@ public interface ExamService {
     public int getDoneCountById(Integer id);
 
     public int getUnDoneCountById(Integer id);
+    public void delByStuId(Integer id);
+
+
 }

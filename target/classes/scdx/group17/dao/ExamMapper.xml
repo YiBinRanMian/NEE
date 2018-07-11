@@ -21,6 +21,9 @@
     <select id="getUnDoneCountById" resultType="java.lang.Integer">
         SELECT count(*) FROM exam WHERE id = #{id} AND grade = -1
     </select>
+    <select id="delByStuId" parameterType="scdx.group17.entity.Exam">
+        DELETE FROM exam WHERE id = #{id}
+    </select>
 
 
 </mapper>

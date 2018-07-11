@@ -14,4 +14,12 @@ public class StudentServiceImpl implements StudentService{
     public Student getById(Integer id) {
         return studentMapper.getById(id);
     }
+
+    @Override
+    public void addUser(Integer id, String password, String gender, String role, String name) {
+        studentMapper.addUser(id,password,gender,role,name);
+    }
+    public void updateUser(Integer id,String password, String gender, String role, String name) {
+        studentMapper.updateUser(id,password, gender, role, name);
+    }
 }

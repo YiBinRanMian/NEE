@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService{
     public User getById(Integer id) { return userMapper.getById(id); }
 
     @Override
-    public void addUser(Integer id, String password, String gender, String role, String name) {
-        userMapper.addUser(id,password,gender,role,name);
+    public void addUser(Integer id, String password, String gender, String role, String name,String subject) {
+        userMapper.addUser(id,password,gender,role,name,subject);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateUser(Integer id,String password, String gender, String role, String name) {
-        userMapper.updateUser(id,password, gender, role, name);
+    public void updateUser(Integer id,String password, String gender, String role, String name,String subject) {
+        userMapper.updateUser(id,password, gender, role, name,subject);
     }
 }

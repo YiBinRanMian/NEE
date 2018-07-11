@@ -9,5 +9,8 @@ import scdx.group17.entity.Student;
 public interface StudentMapper {
 
     public Student getById(@Param("id")Integer id);
+    public void addUser(@Param("id")Integer id,@Param("password")String password,@Param("gender")String gender,@Param("role")String role,@Param("name")String name);
+    public void updateUser(@Param("id")Integer id,@Param("password")String password,@Param("gender")String gender,@Param("role")String role,@Param("name")String name);
+
 
 }

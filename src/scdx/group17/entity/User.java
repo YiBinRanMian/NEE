@@ -6,14 +6,7 @@ public class User {
     private String gender;
     private String role;
     private String name;
-
-    public User(Integer id, String password, String gender, String role, String name) {
-        this.id = id;
-        this.password = password;
-        this.gender = gender;
-        this.role = role;
-        this.name = name;
-    }
+    private String subject;
 
     public Integer getId() {
         return id;
@@ -55,6 +48,23 @@ public class User {
         this.name = name;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public User(Integer id, String password, String gender, String role, String name, String subject) {
+
+        this.id = id;
+        this.password = password;
+        this.gender = gender;
+        this.role = role;
+        this.name = name;
+        this.subject = subject;
+    }
 
     public User() {
     }

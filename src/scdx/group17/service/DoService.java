@@ -22,4 +22,6 @@ public interface DoService {
     public List<Do>getsomeDoneByTechId(String query,Integer id);
 
     public List<Do>getAllDoByHomId(Integer hom_id);
+    public void delByStuId(Integer id);
+
 }

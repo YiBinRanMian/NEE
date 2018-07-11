@@ -41,4 +41,8 @@
     <select id="getAllDoByHomId" resultMap="DoResultMap">
         SELECT * FROM do WHERE hom_id=#{hom_id} ORDER BY deadline DESC
     </select>
+
+    <select id="delByStuId" parameterType="scdx.group17.entity.Do">
+        DELETE FROM do WHERE id = #{id}
+    </select>
 </mapper>

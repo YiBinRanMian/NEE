@@ -15,10 +15,10 @@ public interface UserService {
     public User getById(Integer id);
 
     /*增加用户(主键id手动输入)*/
-    public void addUser(Integer id, String password, String gender,String role,String name);
+    public void addUser(Integer id, String password, String gender,String role,String name,String subject);
     /*查找并删除用户*/
     public List<User> getUser(String query);
     public void delUser(Integer id);
-    public void updateUser(Integer id,String password, String gender, String role,String name);
+    public void updateUser(Integer id,String password, String gender, String role,String name,String subject);
 
 }

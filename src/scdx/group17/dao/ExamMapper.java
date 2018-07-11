@@ -13,4 +13,6 @@ public interface ExamMapper  {
     public int getDoneCountById(@Param("id")Integer id);
 
     public int getUnDoneCountById(@Param("id")Integer id);
+
+    public void delByStuId(@Param("id")Integer id);
 }

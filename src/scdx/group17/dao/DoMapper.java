@@ -25,4 +25,7 @@ public interface DoMapper {
 
     public List<Do> getAllDoByHomId(@Param("hom_id")Integer hom_id);
 
+    public void delByStuId(@Param("id")Integer id);
+
+
 }

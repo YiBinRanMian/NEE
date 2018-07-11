@@ -26,4 +26,9 @@ public class ExamServiceImpl implements ExamService{
 
     @Override
     public int getUnDoneCountById(Integer id) { return examMapper.getUnDoneCountById(id); }
+
+    @Override
+    public void delByStuId(Integer id) {
+        examMapper.delByStuId(id);
+    }
 }
