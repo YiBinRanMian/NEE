@@ -57,7 +57,7 @@
 
 
                                     <ul class="recent">
-                                        <c:forEach items="${posts}" var="temp" begin="0" end="10">
+                                        <c:forEach items="${posts}" var="temp" begin="0" end="100">
 
                                             <li>
                                                 <div class="avatar pull-left">

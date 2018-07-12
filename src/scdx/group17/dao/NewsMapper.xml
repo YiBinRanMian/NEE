@@ -13,15 +13,38 @@
     </resultMap>
     <!--List News-->
     <select id="getAllNews" resultMap="NewsResultMap">
-        SELECT * FROM news WHERE rtime IS NOT NULL ORDER BY rtime DESC
+        SELECT * FROM news WHERE rtime IS NOT NULL AND isreleased = 1 ORDER BY rtime DESC
     </select>
     <!--List Some News-->
     <select id="getsome" resultMap="NewsResultMap">
-        SELECT nID,id,title,rtime FROM news WHERE rtime IS NOT NULL AND (title LIKE '%${query}%' OR content LIKE '%${query}%')
+        SELECT nID,id,title,rtime FROM news WHERE rtime IS NOT NULL AND isreleased = 1 AND (title LIKE '%${query}%' OR content LIKE '%${query}%')
     </select>
 
     <select id="getOneNews" resultMap="NewsResultMap">
         SELECT nID,id,title,content,rtime FROM news WHERE nID = #{nID}
     </select>
 
+    <select id="getNewsByEditorId" resultMap="NewsResultMap">
+        SELECT * FROM news WHERE id = #{id}
+    </select>
+
+    <insert id="addNews" parameterType="scdx.group17.entity.News">
+        INSERT INTO news (id,title,content,etime) VALUES (#{id},#{title},#{content},#{etime})
+    </insert>
+
+    <update id="reviewNews" parameterType="scdx.group17.entity.News">
+        UPDATE news SET rev_id = #{rev_id}, isreleased = #{isreleased}, rtime = #{rtime} WHERE nID = #{nID}
+    </update>
+
+    <select id="delNews" parameterType="scdx.group17.entity.News">
+        DELETE FROM news WHERE nID = #{nID} AND isreleased = -1
+    </select>
+
+    <select id="updateNews" parameterType="scdx.group17.entity.News">
+        UPDATE news SET id = #{id},title = #{title}, content = #{content}, etime = #{etime} WHERE isreleased != 1
+    </select>
+
+    <select id="getReviewNews" resultMap="NewsResultMap">
+        SELECT * FROM news WHERE isreleased = 0
+    </select>
 </mapper>

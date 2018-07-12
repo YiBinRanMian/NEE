@@ -54,10 +54,19 @@
     </c:if>
 
     <c:if test="${one.role eq 'useradmin'}">
-    <ul id="nav">
-        <li><a href="${pageContext.request.contextPath}/user/login.do" class="open"><i class="icon-home"></i> 用户管理</a>
-
-    </ul>
-
+        <ul id="nav">
+            <li><a href="${pageContext.request.contextPath}/user/login.do" class="open"><i class="icon-home"></i> 用户管理</a>
+        </ul>
+    </c:if>
+    <c:if test="${one.role eq 'editor'}">
+        <ul id="nav">
+            <li><a href="${pageContext.request.contextPath}/user/login.do" class="open"><i class="icon-home"></i>发布信息</a>
+            <li><a href="${pageContext.request.contextPath}/news/new.do"><i class="icon-home"></i>发布新闻</a>
+        </ul>
+    </c:if>
+    <c:if test="${one.role eq 'reviewer'}">
+        <ul id="nav">
+            <li><a href="${pageContext.request.contextPath}/user/login.do" class="open"><i class="icon-home"></i> 新闻审核</a>
+        </ul>
     </c:if>
 </div>

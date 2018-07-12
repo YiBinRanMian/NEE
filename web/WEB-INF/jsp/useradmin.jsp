@@ -115,7 +115,7 @@
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <tbody id="tbody">
+                            <tbody>
                             <c:forEach items="${list}" var="temp" begin="0" end="100">
                                 <c:if test="${temp.id ne one.id}">
                                     <tr>

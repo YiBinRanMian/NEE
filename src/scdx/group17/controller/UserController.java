@@ -64,9 +64,9 @@ public class UserController {
             model.addAttribute("one",teacher);
             /*新闻信息*/
             List<News> news = newsService.getAllNews();
-            Map<String,Editor> editorMap = new HashMap<String, Editor>();
+            Map<String,User> editorMap = new HashMap<String, User>();
             for (News temp:news){
-                editorMap.put(temp.getId().toString(),editorService.getById(temp.getId()));
+                editorMap.put(temp.getId().toString(),userService.getById(temp.getId()));
             }
             /*发帖计数*/
             int postCount = postService.getPostCountById(uid);
@@ -88,8 +88,37 @@ public class UserController {
             model.addAttribute("dos",dos);
         }
         else if(role.equals("group")) re = "indexgroup";
-        else if (role.equals("editor")) re = "indexeditor";
-        else if (role.equals("reviewer")) re = "indexreviewer";
+        else if (role.equals("editor")) {
+            re = "indexeditor";
+            /*已编辑新闻信息*/
+            List<News> news = newsService.getNewsByEditorId(uid);
+            User editor = userService.getById(uid);
+            Map<String,User> editorMap = new HashMap<String, User>();
+            for (News temp:news){
+                editorMap.put(temp.getId().toString(),userService.getById(temp.getId()));
+            }
+            Map<String,User> reviewerMap = new HashMap<String, User>();
+            for (News temp:news){
+                if(temp.getIsreleased()!=0)
+                    reviewerMap.put(temp.getRev_id().toString(),userService.getById(temp.getRev_id()));
+            }
+            model.addAttribute("one",editor);
+            model.addAttribute("news",news);
+            model.addAttribute("editorMap",editorMap);
+            model.addAttribute("reviewerMap",reviewerMap);
+        }
+        else if (role.equals("reviewer")) {
+            re = "indexreviewer";
+            List<News> news = newsService.getReviewNews();
+            User reviewer = userService.getById(uid);
+            model.addAttribute("one",reviewer);
+            Map<String,User> editorMap = new HashMap<String, User>();
+            for (News temp:news){
+                editorMap.put(temp.getId().toString(),userService.getById(temp.getId()));
+            }
+            model.addAttribute("news",news);
+            model.addAttribute("editorMap",editorMap);
+        }
         else if (role.equals("useradmin")) {
             re = "useradmin";
             User useradmin = userService.getById(uid);
@@ -121,9 +150,9 @@ public class UserController {
             }
             /*新闻信息*/
             List<News> news = newsService.getAllNews();
-            Map<String,Editor> editorMap = new HashMap<String, Editor>();
+            Map<String,User> editorMap = new HashMap<String, User>();
             for (News temp:news){
-                editorMap.put(temp.getId().toString(),editorService.getById(temp.getId()));
+                editorMap.put(temp.getId().toString(),userService.getById(temp.getId()));
             }
             /*发帖计数*/
             int postCount = postService.getPostCountById(uid);

@@ -36,7 +36,7 @@ public class FileUploadController {
 	        	filepath.getParentFile().mkdirs();
 	        }
 			file.transferTo(new File(path + File.separator + filename));
-			return "userInfo";
+			return "redirect:/FileUpload/getAllFiles.do";
 		} else {
 			return "error";
 		}
