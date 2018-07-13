@@ -11,6 +11,12 @@
     			<root url="file://$MODULE_DIR$/web" relative="/" />
 		</webroots>
 	5. FileUploadController 中三个path设置成自己电脑存储课件的路径
+	6. <component name="NewModuleRootManager"... 中是否有
+		<content url="file://$MODULE_DIR$">
+      			<sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      			<excludeFolder url="file://$MODULE_DIR$/target" />
+    		</content>
+	没有则添加
 	
-contact: friedchickenkai@gmail.com
+	contact: friedchickenkai@gmail.com
 
