@@ -17,11 +17,11 @@
 
         <!-- Navigation starts -->
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-            <form class="navbar-form navbar-left" role="search">
+            <%--<form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-            </form>
+            </form>--%>
             <ul class="nav navbar-nav pull-right">
                 <li class="dropdown pull-right">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -32,7 +32,7 @@
 
                     <!-- Dropdown menu -->
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="icon-user"></i> 资料</a></li>
+<%--                        <li><a href="#"><i class="icon-user"></i> 资料</a></li>--%>
                         <!--
                                       <li><a href="#"><i class="icon-cogs"></i> 设置</a></li>
                         -->

@@ -20,4 +20,7 @@
     <update id="updateUser" parameterType="scdx.group17.entity.Teacher">
         UPDATE teacher SET password = #{password}, gender = #{gender}, name = #{name},role = #{role},subject = #{subject} WHERE id = #{id}
     </update>
+    <select id="getAllTeachers" resultMap="TeacherResultMap">
+        SELECT * FROM teacher
+    </select>
 </mapper>

@@ -45,4 +45,14 @@
     <select id="delByStuId" parameterType="scdx.group17.entity.Do">
         DELETE FROM do WHERE id = #{id}
     </select>
+    <select id="getMax" resultType="java.lang.Integer">
+        SELECT max(hID) FROM do
+    </select>
+    <insert id="addNewHom" parameterType="scdx.group17.entity.Do">
+        INSERT INTO do(hom_id, hID, id, deadline, title) VALUES (#{hom_id},#{hID},#{id},#{deadline},#{title})
+    </insert>
+
+    <update id="updateScore" parameterType="scdx.group17.entity.Do">
+        UPDATE do SET grade = grade + #{grade} WHERE id = #{id} AND hID = #{hID}
+    </update>
 </mapper>

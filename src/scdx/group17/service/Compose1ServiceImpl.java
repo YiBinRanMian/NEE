@@ -15,4 +15,9 @@ public class Compose1ServiceImpl implements Compose1Service {
     public List<Compose1> getById(Integer hID) {
         return compose1Mapper.getById(hID);
     }
+
+    @Override
+    public void addCompose(Integer id, Integer hID, Integer qID) {
+        compose1Mapper.addCompose(id, hID, qID);
+    }
 }

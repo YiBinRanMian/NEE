@@ -5,8 +5,9 @@
         <id column="tes_id" property="tes_id" jdbcType="INTEGER"/>
         <id column="tID" property="tID" jdbcType="INTEGER"/>
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="deadline" property="deadline" jdbcType="TIMESTAMP"/>
+        <result column="deadline" property="deadline" jdbcType="DATE"/>
         <result column="grade" property="grade" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIME"/>
     </resultMap>
 
     <!--Get By Id-->
@@ -24,6 +25,25 @@
     <select id="delByStuId" parameterType="scdx.group17.entity.Exam">
         DELETE FROM exam WHERE id = #{id}
     </select>
+    <insert id="addNewExam" parameterType="scdx.group17.entity.Exam">
+        INSERT INTO exam(id, tes_id, tID, deadline, time,title) VALUES (#{id},#{tes_id},#{tID},#{deadline},#{time},#{title})
+    </insert>
+    <select id="getsomeUnDoneByStuId" resultMap="ExamResultMap">
+        SELECT * FROM exam WHERE title LIKE '%${query}%' AND grade = -1 AND id = #{id} ORDER BY deadline DESC
+    </select>
+    <select id="getsomeDoneByStuId" resultMap="ExamResultMap">
+        SELECT * FROM exam WHERE title LIKE '%${query}%' AND grade >= 0 AND id = #{id} ORDER BY deadline DESC
+    </select>
 
+    <update id="updateScore" parameterType="scdx.group17.entity.Exam">
+        UPDATE exam SET grade = grade + #{grade} WHERE id = #{id} AND tID = #{tID}
+    </update>
 
+    <select id="getByTid" resultMap="ExamResultMap">
+        SELECT * FROM exam WHERE tID = #{tID} AND id = #{id}
+    </select>
+
+    <select id="getMax" resultType="java.lang.Integer">
+        SELECT max(tID) FROM exam
+    </select>
 </mapper>

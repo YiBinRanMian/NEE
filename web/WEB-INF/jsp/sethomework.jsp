@@ -11,7 +11,7 @@
     <!-- Title and other stuffs -->
 
     <jsp:include page="staticinclude.jsp"/>
-    <title>N.E.E 教研组主页</title>
+    <title>N.E.E 布置作业</title>
     <script language="JavaScript">
         function addrow() {
             //添加一行
@@ -49,14 +49,11 @@
         }
 
         function add() {
-            document.addAndDel.action="${pageContext.request.contextPath}/question/add.do?id=${one.id}";
+            document.addAndDel.action="${pageContext.request.contextPath}/homeworks/set.do?id=${one.id}";
             document.addAndDel.submit();
         }
 
-        function del() {
-            document.addAndDel.action="${pageContext.request.contextPath}/question/delQuestions.do";
-            document.addAndDel.submit();
-        }
+
 
         function search() {
             document.search.action="${pageContext.request.contextPath}";
@@ -158,11 +155,7 @@
 </head>
 
 <body>
-<%
 
-    User user = (User) request.getAttribute("one");
-    session.setAttribute("one",user);
-%>
 <jsp:include page="header.jsp"/>
 
 
@@ -205,34 +198,30 @@
                                     <th>题目内容</th>
                                     <th>答案</th>
                                     <th>分值</th>
-                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${questions}" var="temp" varStatus="status">
-                                        <tr>
-                                            <td>
+                                    <tr>
+                                        <td>
                                         <span class="uni">
                                             <input type='checkbox' value='${temp.qID}' name="boxes" />
                                         </span>
-                                            </td>
-                                            <td><c:set var="str"><c:out value="${temp.id}"/></c:set>${stringUserMap[str].name}</td>
-                                            <td>${temp.category}</td>
-                                            <td>${temp.type}</td>
-                                            <td>${temp.title}</td>
-                                            <c:choose>
-                                                <c:when test="${temp.type eq '判断题'}">
-                                                    <td>${temp.answer}</td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td><button type="button" class="btn btn-success" title="A: ${temp.optionA} B: ${temp.optionB} C: ${temp.optionC} D: ${temp.optionD}">${temp.answer}</button></td>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <td>${temp.score}</td>
-                                            <td>
-                                                <a href="${pageContext.request.contextPath}/question/delete.do?qID=${temp.qID}"><button type="button" class="btn btn-xs btn-danger" value="delete"><i class="icon-remove"></i></button></a>
-                                            </td>
-                                        </tr>
+                                        </td>
+                                        <td><c:set var="str"><c:out value="${temp.id}"/></c:set>${stringUserMap[str].name}</td>
+                                        <td>${temp.category}</td>
+                                        <td>${temp.type}</td>
+                                        <td>${temp.title}</td>
+                                        <c:choose>
+                                            <c:when test="${temp.type eq '判断题'}">
+                                                <td>${temp.answer}</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td><button type="button" class="btn btn-success" title="A: ${temp.optionA} B: ${temp.optionB} C: ${temp.optionC} D: ${temp.optionD}">${temp.answer}</button></td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <td>${temp.score}</td>
+                                    </tr>
                                 </c:forEach>
 
 
@@ -242,8 +231,14 @@
                             <div class="widget-foot">
 
                                 <div class="uni pull-left">
-                                    <button type="button" class="btn btn-xs btn-success" onclick="addrow()">添加题目</button>
-                                    <button class="btn btn-xs btn-danger" onclick="del()">批量删除</button>
+                                    <input type='text' name="hID" placeholder="作业号 > ${max}"/>
+                                    <hr/>
+                                    <h6>deadline</h6>
+                                    <input type='text' name="deadline" placeholder="yyyy-MM-dd hh:mm:ss"/>
+                                    <hr/>
+                                    <input type='text' name="title" placeholder="作业标题"/>
+                                    <hr/>
+                                    <button type="button" class="btn btn-xs btn-success" onclick="add()">生成作业</button>
                                     <%--<form action="" name="search" class="form-horizontal" method="post">
                                         <input type="text" class="form-control" placeholder="Search" onclick="search()">
                                     </form>--%>

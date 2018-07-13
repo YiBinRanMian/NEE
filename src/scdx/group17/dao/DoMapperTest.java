@@ -9,6 +9,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @ContextConfiguration("classpath:spring-mybatis.xml")
 public class DoMapperTest {
+    @Test
+    public void getMax() throws Exception {
+        System.out.println(doMapper.getMax());
+    }
+
     @Autowired
     DoMapper doMapper;
     @Test
@@ -46,5 +51,7 @@ public class DoMapperTest {
     public void getsomeDoneByTechId() throws Exception {
         doMapper.getsomeDoneByTechId("",10000);
     }
+
+
 
 }

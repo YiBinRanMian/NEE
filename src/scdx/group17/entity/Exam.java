@@ -1,14 +1,17 @@
 package scdx.group17.entity;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
 
 public class Exam {
     private Integer id;
     private Integer tes_id;
     private Integer tID;
-    private Timestamp deadline;
+    private Date deadline;
     private String cdeadline;
     private Integer grade;
+    private Time time;
+    private String title;
 
     public Integer getId() {
         return id;
@@ -34,11 +37,11 @@ public class Exam {
         this.tID = tID;
     }
 
-    public Timestamp getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Timestamp deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
@@ -58,7 +61,23 @@ public class Exam {
         this.grade = grade;
     }
 
-    public Exam(Integer id, Integer tes_id, Integer tID, Timestamp deadline, String cdeadline, Integer grade) {
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Exam(Integer id, Integer tes_id, Integer tID, Date deadline, String cdeadline, Integer grade, Time time, String title) {
 
         this.id = id;
         this.tes_id = tes_id;
@@ -66,6 +85,8 @@ public class Exam {
         this.deadline = deadline;
         this.cdeadline = cdeadline;
         this.grade = grade;
+        this.time = time;
+        this.title = title;
     }
 
     public Exam(){

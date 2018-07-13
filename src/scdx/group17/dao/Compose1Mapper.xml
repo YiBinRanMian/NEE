@@ -11,4 +11,7 @@
     <select id="getById" resultMap="Compose1ResultMap">
         SELECT * FROM compose1 WHERE hID = #{hID}
     </select>
+    <insert id="addCompose" parameterType="scdx.group17.entity.Compose1">
+        INSERT INTO compose1(id,hID,qID) VALUES (#{id},#{hID},#{qID})
+    </insert>
 </mapper>

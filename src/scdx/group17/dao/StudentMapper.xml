@@ -19,4 +19,10 @@
     <update id="updateUser" parameterType="scdx.group17.entity.Student">
         UPDATE student SET password = #{password}, gender = #{gender}, name = #{name},role = #{role} WHERE id = #{id}
     </update>
+    <select id="getAllStudents" resultMap="StudentResultMap">
+        SELECT * FROM student;
+    </select>
+    <select id="delByStuId" parameterType="scdx.group17.entity.Student">
+        DELETE FROM student WHERE id = #{id}
+    </select>
 </mapper>

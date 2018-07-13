@@ -44,6 +44,7 @@
                 <div class="row">
 
                     <%--教学计划--%>
+<%--
                     <div class="col-md-3">
 
                         <div class="widget">
@@ -81,8 +82,9 @@
                         </div>
 
                     </div>
+--%>
                     <%--新闻浏览--%>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div class="widget">
                             <!-- Widget title -->
                             <div class="widget-head">

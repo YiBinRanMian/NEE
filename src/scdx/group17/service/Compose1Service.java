@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface Compose1Service {
     public List<Compose1> getById(Integer hID);
+    public void addCompose(Integer id, Integer hID, Integer qID);
+
 }

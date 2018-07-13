@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scdx.group17.dao.Compose2Mapper">
+    <resultMap id="Compose2ResultMap" type="scdx.group17.entity.Compose2">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="tID" property="tID" jdbcType="INTEGER"/>
+        <id column="qID" property="qID" jdbcType="INTEGER"/>
+
+    </resultMap>
+    <insert id="addCompose" parameterType="scdx.group17.entity.Compose2">
+      INSERT INTO compose2(id,tID,qID) VALUES (#{id},#{tID},#{qID})
+    </insert>
+
+    <select id="getById" resultMap="Compose2ResultMap">
+        SELECT * FROM compose2 WHERE tID = #{tID}
+    </select>
+</mapper>

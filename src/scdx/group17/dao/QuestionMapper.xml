@@ -4,13 +4,11 @@
     <resultMap id="QuestionResultMap" type="scdx.group17.entity.Question">
         <id column="qID" property="qID" jdbcType="INTEGER"/>
         <result column="id" property="id" jdbcType="INTEGER"/>
-        <result column="tea_id" property="tea_id" jdbcType="INTEGER"/>
         <result column="category" property="category" jdbcType="VARCHAR"/>
         <result column="type" property="type" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="answer" property="answer" jdbcType="CLOB"/>
         <result column="score" property="score" jdbcType="INTEGER"/>
-        <result column="isreleased" property="isreleased" jdbcType="TINYINT"/>
         <result column="optionA" property="optionA" jdbcType="VARCHAR"/>
         <result column="optionB" property="optionB" jdbcType="VARCHAR"/>
         <result column="optionC" property="optionC" jdbcType="VARCHAR"/>
@@ -22,5 +20,21 @@
         SELECT * FROM question WHERE qID = #{qID}
     </select>
 
+    <select id="questionList" resultMap="QuestionResultMap">
+        SELECT * FROM question
+    </select>
+
+    <insert id="addQuestion" parameterType="scdx.group17.entity.Question">
+        INSERT INTO question(id,category,type,title,answer,score,optionA,optionB,optionC,optionD) VALUES (#{id},#{category},#{type},#{title},#{answer},#{score},#{optionA},#{optionB},#{optionC},#{optionD})
+    </insert>
+
+    <insert id="addJudge" parameterType="scdx.group17.entity.Question">
+        INSERT INTO question(id,category,type,title,answer,score)
+        VALUES (#{id},#{category},#{type},#{title},#{answer},#{score})
+    </insert>
+
+    <select id="delByQid" parameterType="scdx.group17.entity.Question">
+        DELETE FROM question WHERE qID = #{qID}
+    </select>
 
 </mapper>

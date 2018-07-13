@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import scdx.group17.dao.DoMapper;
 import scdx.group17.entity.Do;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -61,5 +62,20 @@ public class DoServiceImpl implements DoService{
     @Override
     public void delByStuId(Integer id) {
         doMapper.delByStuId(id);
+    }
+
+    @Override
+    public int getMax() {
+        return doMapper.getMax();
+    }
+
+    @Override
+    public void addNewHom(Integer hom_id, Integer hID, Integer id, Timestamp deadline, String title) {
+        doMapper.addNewHom(hom_id, hID, id, deadline, title);
+    }
+
+    @Override
+    public void updateScore(Integer id, Integer hID, Integer grade) {
+        doMapper.updateScore(id,hID,grade);
     }
 }

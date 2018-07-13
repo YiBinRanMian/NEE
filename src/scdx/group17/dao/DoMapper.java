@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import scdx.group17.entity.Do;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -27,5 +28,9 @@ public interface DoMapper {
 
     public void delByStuId(@Param("id")Integer id);
 
+    public int getMax();
 
+    public void addNewHom(@Param("hom_id")Integer hom_id, @Param("hID")Integer hID, @Param("id")Integer id, @Param("deadline")Timestamp deadline, @Param("title")String title);
+
+    public void updateScore(@Param("id")Integer id,@Param("hID")Integer hID,@Param("grade")Integer grade);
 }

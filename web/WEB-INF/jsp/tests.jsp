@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <!-- Title and other stuffs -->
     <jsp:include page="staticinclude.jsp"/>
-    <title>N.E.E 查看作业情况</title>
+    <title>N.E.E 查看考试情况</title>
 
 </head>
 
@@ -44,7 +44,7 @@
                         <div class="widget">
                             <!-- Widget title -->
                             <div class="widget-head">
-                                <div class="pull-left">未完成作业</div>
+                                <div class="pull-left">未完成考试</div>
                                 <div class="widget-icons pull-right">
                                     <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
                                 </div>
@@ -55,16 +55,15 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <tbody><tr>
                                         <th>标题</th>
-                                        <th>学科</th>
-                                        <th>教师</th>
+                                        <th>教研组</th>
                                         <th>完成情况</th>
                                         <th>截止日期</th>
+                                        <th>考试时长</th>
                                     </tr>
                                     <c:forEach items="${unDones}" var="temp" begin="0" end="10">
                                         <tr>
-                                            <td><a href="${pageContext.request.contextPath}/homeworks/dohomework.do?hID=${temp.hID}&step=0">${temp.title}</a></td>
-                                            <td><c:set var="str"><c:out value="${temp.hom_id}"/></c:set>${unTeacherMap[str].subject}</td>
-                                            <td><c:set var="str"><c:out value="${temp.hom_id}"/></c:set>${unTeacherMap[str].name}</td>
+                                            <td><a href="${pageContext.request.contextPath}/test/dotest.do?tID=${temp.tID}&step=0">${temp.title}</a></td>
+                                            <td><c:set var="str"><c:out value="${temp.tes_id}"/></c:set>${unTeacherMap[str].name}</td>
                                             <td><c:if test="${temp.grade==-1}">
                             <span class="label label-danger">
                                   未完成
@@ -77,6 +76,8 @@
                                                 </c:if>
                                             </td>
                                             <td>${temp.deadline}</td>
+                                            <td>${temp.time}</td>
+
                                         </tr>
                                     </c:forEach>
                                     </tbody></table>
@@ -91,7 +92,7 @@
                         <div class="widget">
                             <!-- Widget title -->
                             <div class="widget-head">
-                                <div class="pull-left">已完成作业</div>
+                                <div class="pull-left">已完成考试</div>
                                 <div class="widget-icons pull-right">
                                     <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
                                 </div>
@@ -102,16 +103,15 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <tbody><tr>
                                         <th>标题</th>
-                                        <th>学科</th>
-                                        <th>教师</th>
+                                        <th>教研组</th>
                                         <th>完成情况</th>
                                         <th>截止日期</th>
+                                        <th>考试时长</th>
                                     </tr>
                                     <c:forEach items="${Dones}" var="temp" begin="0" end="10">
                                         <tr>
                                             <td><a href="#">${temp.title}</a></td>
-                                            <td>${teacherMap[str].subject}</td>
-                                            <td><c:set var="str"><c:out value="${temp.hom_id}"/></c:set>${teacherMap[str].name}</td>
+                                            <td><c:set var="str"><c:out value="${temp.tes_id}"/></c:set>${teacherMap[str].name}</td>
                                             <td><c:if test="${temp.grade==-1}">
                             <span class="label label-danger">
                                   未完成
@@ -124,6 +124,7 @@
                                                 </c:if>
                                             </td>
                                             <td>${temp.deadline}</td>
+                                            <td>${temp.time}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody></table>

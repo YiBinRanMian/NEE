@@ -41,23 +41,23 @@
                     <!-- Visitors, pageview, bounce rate, etc., Sparklines plugin used -->
                     <ul class="current-status">
                       <li>
-                        <span id="status1"></span> <span class="bold">待完成作业 : ${unDoneCount}</span>
+                        <span id="status1"></span> <span class="bold"><a href="${pageContext.request.contextPath}/homeworks/gethomeworks.do?&query=&id=${one.id}">待完成作业 : ${unDoneCount}</a></span>
                         <hr>
                       </li>
                       <li>
-                        <span id="status2"></span> <span class="bold">已完成作业 : ${doneCount}</span>
+                        <span id="status2"></span> <span class="bold"><a href="${pageContext.request.contextPath}/homeworks/gethomeworks.do?&query=&id=${one.id}">已完成作业 : ${doneCount}</a></span>
                         <hr>
                       </li>
                       <li>
-                        <span id="status3"></span> <span class="bold">待完成考试 : ${unExamCount}</span>
+                        <span id="status3"></span> <span class="bold"><a href="${pageContext.request.contextPath}/test/tests.do?&query=&id=${one.id}">待完成考试 : ${unExamCount}</a></span>
                         <hr>
                       </li>
                       <li>
-                        <span id="status4"></span> <span class="bold">已完成考试 : ${examCount}</span>
+                        <span id="status4"></span> <span class="bold"><a href="${pageContext.request.contextPath}/test/tests.do?&query=&id=${one.id}">已完成考试 : ${examCount}</a></span>
                         <hr>
                       </li>
                       <li>
-                        <span id="status5"></span> <span class="bold">论坛发帖 : ${postCount}</span>
+                        <span id="status5"></span> <span class="bold"><a href="${pageContext.request.contextPath}/post/addPost.do">论坛发帖 : ${postCount}</a></span>
                       </li>
                     </ul>
 
@@ -139,14 +139,14 @@
                     <table class="table table-striped table-bordered table-hover">
                       <tbody><tr>
                         <th>教学组</th>
-                        <th>学科</th>
+                        <th>考试</th>
                         <th>完成情况</th>
                         <th>考试时间</th>
                       </tr>
                       <c:forEach items="${exams}" var="temp" begin="0" end="5">
                         <tr>
                           <td><c:set var="str"><c:out value="${temp.tes_id}"/></c:set>${examTgroupMap[str].name}</td>
-                          <td>${examTgroupMap[str].subject}</td>
+                          <td>${temp.title}</td>
                           <td><c:if test="${temp.grade==-1}">
                             <span class="label label-danger">
                                   未完成

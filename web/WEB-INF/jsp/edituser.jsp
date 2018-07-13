@@ -70,30 +70,16 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-3" >性别</label>
                                             <div class="col-lg-6">
-                                                <c:if test="${edited.gender eq 'male'}">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="male" checked>male
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="female">female
-                                                        </label>
-                                                    </div>
-                                                </c:if>
-                                                <c:if test="${edited.gender eq 'female'}">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="male" >male
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input type="radio" name="optionsRadios" id="optionsRadios4" value="female" checked>female
-                                                        </label>
-                                                    </div>
-                                                </c:if>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="male">male
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="female">female
+                                                    </label>
+                                                </div>
                                             </div>
                                             
                                         </div>

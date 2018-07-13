@@ -10,4 +10,16 @@
     <select id="delByStuId" parameterType="scdx.group17.entity.Teach">
         DELETE FROM teach WHERE stu_id = #{stu_id}
     </select>
+
+    <select id="selectByTeachId" resultMap="TeachResultMap">
+        SELECT * FROM teach WHERE id = #{id}
+    </select>
+
+    <insert id="addClass" parameterType="scdx.group17.entity.Teach">
+        INSERT INTO teach(stu_id, id) VALUES (#{stu_id},#{id})
+    </insert>
+
+    <delete id="delClass" parameterType="scdx.group17.entity.Teach">
+        DELETE FROM teach WHERE stu_id = #{stu_id} AND id = #{id}
+    </delete>
 </mapper>

@@ -3,13 +3,11 @@ package scdx.group17.entity;
 public class Question {
     private Integer qID;
     private Integer id;
-    private Integer tea_id;
     private String category;
     private String type;
     private String title;
     private String answer;
-    private String score;
-    private Integer isreleased;
+    private Integer score;
     private String optionA;
     private String optionB;
     private String optionC;
@@ -30,14 +28,6 @@ public class Question {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getTea_id() {
-        return tea_id;
-    }
-
-    public void setTea_id(Integer tea_id) {
-        this.tea_id = tea_id;
     }
 
     public String getCategory() {
@@ -72,20 +62,12 @@ public class Question {
         this.answer = answer;
     }
 
-    public String getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Integer score) {
         this.score = score;
-    }
-
-    public Integer getIsreleased() {
-        return isreleased;
-    }
-
-    public void setIsreleased(Integer isreleased) {
-        this.isreleased = isreleased;
     }
 
     public String getOptionA() {
@@ -120,17 +102,15 @@ public class Question {
         this.optionD = optionD;
     }
 
-    public Question(Integer qID, Integer id, Integer tea_id, String category, String type, String title, String answer, String score, Integer isreleased, String optionA, String optionB, String optionC, String optionD) {
+    public Question(Integer qID, Integer id,String category, String type, String title, String answer, Integer score,  String optionA, String optionB, String optionC, String optionD) {
 
         this.qID = qID;
         this.id = id;
-        this.tea_id = tea_id;
         this.category = category;
         this.type = type;
         this.title = title;
         this.answer = answer;
         this.score = score;
-        this.isreleased = isreleased;
         this.optionA = optionA;
         this.optionB = optionB;
         this.optionC = optionC;

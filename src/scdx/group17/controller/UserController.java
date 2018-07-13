@@ -38,6 +38,8 @@ public class UserController {
     private CommentService commentService;
     @Autowired
     private TeachService teachService;
+    @Autowired
+    private QuestionService questionService;
 
     @RequestMapping("/login.do")
     public String login(Model model, HttpSession session, HttpServletRequest request, String id, String password){
@@ -52,11 +54,15 @@ public class UserController {
             int pbindex = s.indexOf(", password='")+12;
             int peindex = s.indexOf("}")-1;
             password = s.substring(pbindex,peindex);
-
+        }
+        String re = "";
+        if(!id.matches("[0-9]+")){
+            model.addAttribute("info","用户名格式不正确");
+            model.addAttribute("no","0");
+            return "error";
         }
         Integer uid = Integer.parseInt(id);
         String role = userService.getIfLogin(uid,password);
-        String re = "";
         if(role.equals("teacher")) {
             re = "indexteacher";
 
@@ -87,7 +93,19 @@ public class UserController {
             model.addAttribute("studentMap",studentMap);
             model.addAttribute("dos",dos);
         }
-        else if(role.equals("group")) re = "indexgroup";
+        else if(role.equals("group")) {
+            re = "indexgroup";
+            User user = userService.getById(uid);
+            List<Question> questions = questionService.questionList();
+
+            Map<String,User> stringUserMap = new HashMap<String, User>();
+            for (Question temp:questions){
+                stringUserMap.put(temp.getId().toString(),userService.getById(temp.getId()));
+            }
+            model.addAttribute("one",user);
+            model.addAttribute("questions",questions);
+            model.addAttribute("stringUserMap",stringUserMap);
+        }
         else if (role.equals("editor")) {
             re = "indexeditor";
             /*已编辑新闻信息*/
@@ -144,9 +162,9 @@ public class UserController {
             int unExamCount = examService.getUnDoneCountById(uid);
             /*考试信息*/
             List<Exam> exams = examService.getAllExamById(uid);
-            Map<String,Tgroup> examTgroupMap = new HashMap<String, Tgroup>();
+            Map<String,User> userMap = new HashMap<String, User>();
             for (Exam temp:exams){
-                examTgroupMap.put(temp.getTes_id().toString(),tgroupService.getById(temp.getTes_id()));
+                userMap.put(temp.getTes_id().toString(),userService.getById(temp.getTes_id()));
             }
             /*新闻信息*/
             List<News> news = newsService.getAllNews();
@@ -166,7 +184,7 @@ public class UserController {
             model.addAttribute("doneCount",doneCount);
             model.addAttribute("unDoneCount",unDoneCount);
             model.addAttribute("exams",exams);
-            model.addAttribute("examTgroupMap",examTgroupMap);
+            model.addAttribute("examTgroupMap",userMap);
             model.addAttribute("examCount",examCount);
             model.addAttribute("unExamCount",unExamCount);
             model.addAttribute("news",news);
@@ -177,7 +195,11 @@ public class UserController {
         }
         else if (role.equals("userAdmin")) re = "indexuseradmin";
         else if (role.equals("postAdmin")) re = "indexpostadmin";
-        else re = "forget";
+        else {
+            re = "error";
+            model.addAttribute("info","忘记密码!");
+            model.addAttribute("no","0");
+        }
         return re;
     }
 
@@ -205,7 +227,12 @@ public class UserController {
         return "edituser";
     }
     @RequestMapping("/esubmit.do")
-    public String esubmit(String id,String password,String name,String optionsRadios,String role,String subject,String confirm){
+    public String esubmit(Model model,String id,String password,String name,String optionsRadios,String role,String subject,String confirm){
+        if(id==null || password == null){
+            model.addAttribute("info","用户名或密码不能为空!");
+            model.addAttribute("no","1");
+            return "error";
+        }
         Integer uid = Integer.parseInt(id);
         if (confirm.equals("agree"))
             userService.updateUser(uid,password,optionsRadios,role,name,subject);
@@ -224,14 +251,19 @@ public class UserController {
             examService.delByStuId(uid);
             doService.delByStuId(uid);
             teachService.delByStuId(uid);
+            studentService.delByStuId(uid);
         }
         userService.delUser(uid);
         return "redirect:/user/login.do";
     }
 
     @RequestMapping("/add.do")
-    public String addUser(String addid,String addpassword,String addname,String addgender,String addrole,String addsubject){
-        System.out.println("添加信息："+addid+addpassword+addname+addgender+addrole);
+    public String addUser(Model model,String addid,String addpassword,String addname,String addgender,String addrole,String addsubject){
+        if(addid.equals("") || addpassword.equals("")){
+            model.addAttribute("info","用户名或密码不能为空!");
+            model.addAttribute("no","1");
+            return "error";
+        }
         Integer uid = Integer.parseInt(addid);
         userService.addUser(uid,addpassword,addgender,addrole,addname,addsubject);
         if(addrole.equals("student"))  studentService.addUser(uid,addpassword,addgender,addrole,addname);
@@ -239,13 +271,15 @@ public class UserController {
         return "redirect:/user/login.do";
     }
     @RequestMapping("/delUsers.do")
-    public String delUsers(String[] boxes){
+    public String delUsers(Model model,String[] boxes){
         if(boxes!=null){
             for (String temp:boxes){
                 Integer uid = Integer.parseInt(temp);
                 User user = userService.getById(uid);
                 if (user.getRole().equals("teacher") || user.getRole().equals("tgroup")|| user.getRole().equals("editor")|| user.getRole().equals("reviewer")){
-                    return "alert";
+                    model.addAttribute("info","教师、编辑、审核、教研组不能删除!");
+                    model.addAttribute("no","1");
+                    return "error";
                 }
                 if(user.getRole().equals("student")){
                     examService.delByStuId(uid);

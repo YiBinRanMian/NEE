@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import scdx.group17.dao.TeacherMapper;
 import scdx.group17.entity.Teacher;
 
+import java.util.List;
+
 @Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
@@ -19,5 +21,10 @@ public class TeacherServiceImpl implements TeacherService {
     }
     public void updateUser(Integer id,String password, String gender, String role, String name,String subject) {
         teacherMapper.updateUser(id,password, gender, role, name,subject);
+    }
+
+    @Override
+    public List<Teacher> getAllTeachers() {
+        return teacherMapper.getAllTeachers();
     }
 }

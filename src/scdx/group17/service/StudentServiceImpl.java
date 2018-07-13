@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import scdx.group17.dao.StudentMapper;
 import scdx.group17.entity.Student;
 
+import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService{
     @Autowired
@@ -21,5 +23,15 @@ public class StudentServiceImpl implements StudentService{
     }
     public void updateUser(Integer id,String password, String gender, String role, String name) {
         studentMapper.updateUser(id,password, gender, role, name);
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return studentMapper.getAllStudents();
+    }
+
+    @Override
+    public void delByStuId(Integer id) {
+        studentMapper.delByStuId(id);
     }
 }

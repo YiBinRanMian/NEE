@@ -12,7 +12,12 @@
     <!-- Title and other stuffs -->
     <jsp:include page="staticinclude.jsp"/>
     <title>N.E.E 完成作业</title>
-
+    <style>
+        *{margin:0;}
+        label{vertical-align:middle}
+        .inputcheckbox{vertical-align:middle;}
+        body{font-family:tahoma;font-size:12px;}
+    </style>
 </head>
 
 <body>
@@ -50,178 +55,81 @@
                             <div class="widget-content">
                                 <div class="padd">
 
-                                    <h6>${stuDo.title}</h6>
+                                    <h6>${stuDo.title}</h6> <h6 align="right">当前进度: ${step}/${size}</h6>
                                     <hr />
                                     <!-- Form starts.  -->
-                                    <form class="form-horizontal" role="form">
-                                        <c:forEach items="${questions}" var="temp" begin="0" end="100" varStatus="a">
-                                            <c:if test="${temp.type eq '问答题'}">
+
+                                    <form class="form-horizontal" action="${pageContext.request.contextPath}/homeworks/dohomework.do?&hID=${hID}&qID=${qID}&step=${step}&size=${size}" method="post">
+                                            <c:if test="${question.type eq '单选题'}">
                                                 <div class="form-group">
                                                     <label class="col-lg-4 control-label"></label>
                                                     <div class="col-lg-8">
-                                                        <h6><c:out value="${a.count}"/>: ${temp.title}</h6>
-                                                        <textarea class="form-control" rows="3" placeholder="回答区域"></textarea>
-                                                    </div>
-                                                </div>
-                                            </c:if>
-                                            <c:if test="${temp.type eq '选择题'}">
-                                                <div class="form-group">
-                                                    <label class="col-lg-4 control-label"></label>
-                                                    <div class="col-lg-8">
-                                                        <h6><c:out value="${a.count}"/>: ${temp.title}</h6>
+                                                        <h5><c:out value="${step}"/>: ${question.title}</h5>
                                                         <div class="radio">
-                                                            <input type="radio" name="optionsRadios" value="optionA">
-                                                            <label for="${temp.optionA}">
-                                                                    ${temp.optionA}
-                                                            </label>
+                                                            <input type="radio" class="inputcheckbox" name="answer" value="A">
+                                                            <label for="${question.optionA}">${question.optionA}</label>
                                                         </div>
                                                         <div class="radio">
-                                                            <input type="radio" name="optionsRadios" value="optionB">
-                                                            <label for="${temp.optionB}">
-                                                                    ${temp.optionB}
-                                                            </label>
+                                                            <input type="radio" class="inputcheckbox" name="answer" value="B">
+                                                            <label for="${question.optionB}">${question.optionB}</label>
                                                         </div>
                                                         <div class="radio">
-                                                            <input type="radio" name="optionsRadios" value="optionC">
-                                                            <label for="${temp.optionC}">
-                                                                    ${temp.optionC}
-                                                            </label>
+                                                            <input type="radio" class="inputcheckbox" name="answer" value="C">
+                                                            <label for="${question.optionC}">${question.optionC}</label>
                                                         </div>
                                                         <div class="radio">
-                                                            <input type="radio" name="optionsRadios" value="optionD">
-                                                            <label for="${temp.optionD}">
-                                                                    ${temp.optionD}
-                                                            </label>
+                                                            <input type="radio" class="inputcheckbox" name="answer" value="D">
+                                                            <label for="${question.optionD}">${question.optionD}</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </c:if>
-                                        </c:forEach>
-<%--                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Radio Box</label>
-                                            <div class="col-lg-8">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                        Option one is this and that&mdash;be sure to include why it's great
-                                                    </label>
+                                            <c:if test="${question.type eq '多选题'}">
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"></label>
+                                                    <div class="col-lg-8">
+                                                        <h5><c:out value="${step}"/>: ${question.title}</h5>
+
+                                                        <label class="inputcheckbox">
+                                                            <input type="checkbox"  name="answer1" value="A"> ${question.optionA}
+                                                        </label><br/>
+                                                        <label class="inputcheckbox">
+                                                            <input type="checkbox" name="answer1" value="B"> ${question.optionB}
+                                                        </label><br/>
+                                                        <label class="inputcheckbox">
+                                                            <input type="checkbox" name="answer1" value="C"> ${question.optionC}
+                                                        </label><br/>
+                                                        <label class="inputcheckbox">
+                                                            <input type="checkbox" name="answer1" value="D"> ${question.optionD}
+                                                        </label> <br/>
+                                                    </div>
                                                 </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                        Option two can be something else and selecting it will deselect option one
-                                                    </label>
+                                            </c:if>
+                                            <c:if test="${question.type eq '判断题'}">
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"></label>
+                                                    <div class="col-lg-8">
+                                                        <h5><c:out value="${step}"/>: ${question.title}</h5>
+                                                        <div class="radio">
+                                                            <input type="radio" class="inputcheckbox" name="answer" value="A"> True
+                                                        </div>
+                                                        <div class="radio">
+                                                            <input type="radio" class="inputcheckbox" name="answer" value="B"> False
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>--%>
+                                            </c:if>
                                         <hr />
                                         <div class="form-group">
                                             <div class="col-lg-offset-1 col-lg-9">
-                                                <button type="button" class="btn btn-success">提交</button>
-<%--
-                                                <button type="button" class="btn btn-danger">Danger</button>
---%>
+                                                <c:if test="${step+1 eq size}">
+                                                    <button type="submit" class="btn btn-success">提交</button>
+                                                </c:if>
+                                                <c:if test="${step+1 ne size}">
+                                                    <button type="submit" class="btn btn-success">下一题</button>
+                                                </c:if>
                                             </div>
                                         </div>
-
-<%--                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Input Box</label>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" placeholder="Input Box">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Password</label>
-                                            <div class="col-lg-8">
-                                                <input type="password" class="form-control" placeholder="Password Box">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Textarea</label>
-                                            <div class="col-lg-8">
-                                                <textarea class="form-control" rows="3" placeholder="Textarea"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Checkbox</label>
-                                            <div class="col-lg-8">
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-                                                </label>
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-                                                </label>
-                                                <label class="checkbox-inline">
-                                                    <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Radio Box</label>
-                                            <div class="col-lg-8">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                        Option one is this and that&mdash;be sure to include why it's great
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                        Option two can be something else and selecting it will deselect option one
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">QuestionResultMap
-                                            <label class="col-lg-4 control-label">Select Box</label>
-                                            <div class="col-lg-8">
-                                                <select class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Select Box</label>
-                                            <div class="col-lg-8">
-                                                <select multiple class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">CLEditor</label>
-                                            <div class="col-lg-8">
-                                                <textarea class="cleditor" name="input"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <hr />
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-1 col-lg-9">
-                                                <button type="button" class="btn btn-default">Default</button>
-                                                <button type="button" class="btn btn-primary">Primary</button>
-                                                <button type="button" class="btn btn-success">Success</button>
-                                                <button type="button" class="btn btn-info">Info</button>
-                                                <button type="button" class="btn btn-warning">Warning</button>
-                                                <button type="button" class="btn btn-danger">Danger</button>
-                                            </div>
-                                        </div>--%>
                                     </form>
                                 </div>
                             </div>

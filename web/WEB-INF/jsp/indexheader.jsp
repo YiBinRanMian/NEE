@@ -17,11 +17,11 @@
 
         <!-- Navigation starts -->
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-            <form class="navbar-form navbar-left" role="search">
+            <%--<form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-            </form>
+            </form>--%>
             <ul class="nav navbar-nav pull-right">
                 <li class="dropdown pull-right">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -30,7 +30,7 @@
 
                     <!-- Dropdown menu -->
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="icon-user"></i> 资料</a></li>
+                        <%--<li><a href="#"><i class="icon-user"></i> 资料</a></li>--%>
                         <!--
                                       <li><a href="#"><i class="icon-cogs"></i> 设置</a></li>
                         -->
@@ -51,7 +51,7 @@
             <div class="col-md-4">
                 <!-- Logo. -->
                 <div class="logo">
-                    <h1><a href="#">应急化<span class="bold"></span></a></h1>
+                    <h1><a href="${pageContext.request.contextPath}/user/login.do">应急化<span class="bold"></span></a></h1>
                     <p class="meta">培训平台</p>
                 </div>
                 <!-- Logo ends -->
@@ -78,89 +78,28 @@
                             <c:forEach items="${comments}" var="temp" begin="0" end="2">
                                 <li>
                                     <!-- List item heading h6 -->
-                                    <h6><a href="#">${temp.content}</a> <span class="label label-warning pull-right">${temp.time}</span></h6>
+                                    <h6><a href="${pageContext.request.contextPath}/comments/getPostComments.do?pID=${temp.pID}&ismodified=0">${temp.content}</a> <span class="label label-warning pull-right">${temp.time}</span></h6>
                                     <div class="clearfix"></div>
                                     <hr>
                                 </li>
                             </c:forEach>
                             <li>
                                 <div class="drop-foot">
-                                    <a href="#">查看所有</a>
+                                    <a href="${pageContext.request.contextPath}/post/getPosts.do?&query=&ismodified=0">查看所有</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
                         <li class="dropdown dropdown-big">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                            <i class="icon-envelope-alt"></i> 新的作业 <span class="label label-primary">${unDoneCount}</span>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li>
-                                <!-- Heading - h5 -->
-                                <h5><i class="icon-envelope-alt"></i> 作业</h5>
-                                <!-- Use hr tag to add border -->
-                                <hr>
-                            </li>
-                            <c:forEach items="${dos}" var="temp" begin="0" end="3">
-                                <li>
-                                    <c:if test="${temp.grade==-1}">
-                                        <c:set var="str"><c:out value="${temp.hom_id}"/></c:set>
-                                        <h6><a href="#">${doTeacherMap[str].subject}
-                                        </a></h6>
-                                        <!-- List item para -->
-                                        <p>
-                                            <!-- Task -->
-                                                ${doTeacherMap[str].name}
-                                        </p>
-                                        <hr>
-
-                                    </c:if>
-                                </li>
-                            </c:forEach>
-                            <li>
-                                <div class="drop-foot">
-                                    <a href="#">查看所有</a>
-                                </div>
-                            </li>
-                        </ul>
+                            <a href="${pageContext.request.contextPath}/homeworks/gethomeworks.do?&query=&id=${one.id}">
+                                <i class="icon-envelope-alt"></i> 新的作业 <span class="label label-primary">${unDoneCount}</span>
+                            </a>
                     </li>
                         <li class="dropdown dropdown-big">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                            <i class="icon-envelope-alt"></i> 新的考试 <span class="label label-success">${unExamCount}</span>
-                        </a>
+                            <a href="${pageContext.request.contextPath}/test/tests.do?&query=&id=${one.id}">
+                                <i class="icon-envelope-alt"></i> 新的考试 <span class="label label-success">${unExamCount}</span>
+                            </a>
 
-                        <ul class="dropdown-menu">
-                            <c:forEach items="${exams}" var="temp" begin="0" end="3">
-                                <li>
-                                    <!-- Heading - h5 -->
-                                    <h5><i class="icon-envelope-alt"></i> 考试</h5>
-                                    <!-- Use hr tag to add border -->
-                                    <hr>
-                                </li>
-                                <li>
-                                    <c:if test="${temp.grade==-1}">
-                                        <c:set var="str"><c:out value="${temp.tes_id}"/></c:set>
-                                        <h6><a href="#">${examTgroupMap[str].subject}
-                                        </a></h6>
-                                        <!-- List item para -->
-                                        <p>
-                                            <!-- Task -->
-                                                ${examTgroupMap[str].name}
-                                        </p>
-                                        <hr>
-
-                                    </c:if>
-                                    <!-- List item heading h6 -->
-
-                                </li>
-                            </c:forEach>
-                            <li>
-                                <div class="drop-foot">
-                                    <a href="#">查看所有</a>
-                                </div>
-                            </li>
-                        </ul>
                     </li>
                     </c:if>
 
@@ -180,43 +119,22 @@
                                 <c:forEach items="${comments}" var="temp" begin="0" end="2">
                                     <li>
                                         <!-- List item heading h6 -->
-                                        <h6><a href="#">${temp.content}</a> <span class="label label-warning pull-right">${temp.time}</span></h6>
+                                        <h6><a href="${pageContext.request.contextPath}/comments/getPostComments.do?pID=${temp.pID}&ismodified=0">${temp.content}</a> <span class="label label-warning pull-right">${temp.time}</span></h6>
                                         <div class="clearfix"></div>
                                         <hr>
                                     </li>
                                 </c:forEach>
-                                    <%--<li>
-                                      <!-- List item heading h6 -->
-                                      <h6><a href="#">你好 :)</a> <span class="label label-warning pull-right">10:42</span></h6>
-                                      <div class="clearfix"></div>
-                                      <hr>
-                                    </li>
-                                    <li>
-                                      <h6><a href="#">你怎么样?</a> <span class="label label-warning pull-right">20:42</span></h6>
-                                      <div class="clearfix"></div>
-                                      <hr>
-                                    </li>
-                                    <li>
-                                      <h6><a href="#">你在干撒呢?</a> <span class="label label-warning pull-right">14:42</span></h6>
-                                      <div class="clearfix"></div>
-                                      <hr>
-                                    </li>--%>
                                 <li>
                                     <div class="drop-foot">
-                                        <a href="#">查看所有</a>
+                                        <a href="${pageContext.request.contextPath}/post/getPosts.do?&query=&ismodified=0">查看所有</a>
                                     </div>
                                 </li>
                             </ul>
                         </li>
                     </c:if>
                 </ul>
-
             </div>
-
         </div>
-
-
-
     </div>
     </div>
 </header>
