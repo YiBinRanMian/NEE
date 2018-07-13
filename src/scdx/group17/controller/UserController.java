@@ -27,11 +27,7 @@ public class UserController {
     @Autowired
     private ExamService examService;
     @Autowired
-    private TgroupService tgroupService;
-    @Autowired
     private NewsService newsService;
-    @Autowired
-    private EditorService editorService;
     @Autowired
     private PostService postService;
     @Autowired
@@ -41,11 +37,16 @@ public class UserController {
     @Autowired
     private QuestionService questionService;
 
+    /*
+    * 登录Controller
+    * */
     @RequestMapping("/login.do")
-    public String login(Model model, HttpSession session, HttpServletRequest request, String id, String password){
-        if(request.getParameter("idtext")!=null){
-            id = request.getParameter("idtext");
-            password = request.getParameter("passwordtext");
+    public String login(Model model, HttpSession session, HttpServletRequest request,String idtext, String passwordtext){
+        String id = "";
+        String password = "";
+        if(idtext!=null){
+            id = idtext;
+            password = passwordtext;
         }else {
             String s = session.getAttribute("one").toString();
             int ibindex = s.indexOf("id=")+3;
@@ -54,6 +55,7 @@ public class UserController {
             int pbindex = s.indexOf(", password='")+12;
             int peindex = s.indexOf("}")-1;
             password = s.substring(pbindex,peindex);
+            System.out.println("用户名密码："+ id + password);
         }
         String re = "";
         if(!id.matches("[0-9]+")){
@@ -63,6 +65,7 @@ public class UserController {
         }
         Integer uid = Integer.parseInt(id);
         String role = userService.getIfLogin(uid,password);
+        System.out.println("角色: "+ role);
         if(role.equals("teacher")) {
             re = "indexteacher";
 
@@ -193,7 +196,6 @@ public class UserController {
             model.addAttribute("comments",comments);
             model.addAttribute("commentCount",commentCount);
         }
-        else if (role.equals("userAdmin")) re = "indexuseradmin";
         else if (role.equals("postAdmin")) re = "indexpostadmin";
         else {
             re = "error";
@@ -234,18 +236,35 @@ public class UserController {
             return "error";
         }
         Integer uid = Integer.parseInt(id);
-        if (confirm.equals("agree"))
+        User user = userService.getById(uid);
+        if (confirm.equals("agree")){
+            if (!user.getRole().equals(role)){
+                if(user.getRole().equals("student")){
+                    studentService.delByStuId(uid);
+                    if(role.equals("teacher")) teacherService.addUser(uid,password,optionsRadios,role,name,subject);
+                }
+                else if(user.getRole().equals("teacher")){
+                    teacherService.delByTeacherId(uid);
+                    if (role.equals("student")) studentService.addUser(uid,password,optionsRadios,role,name);
+                }
+            }
+            else {
+                if(user.getRole().equals("student"))  studentService.updateUser(uid,password,optionsRadios,role, name);
+                else if (user.getRole().equals("teacher")) teacherService.updateUser(uid,password,optionsRadios,role,name,subject);
+            }
             userService.updateUser(uid,password,optionsRadios,role,name,subject);
+        }
         return "redirect:/user/login.do";
     }
 
     @RequestMapping("/delete.do")
-    public String deleteUser(String id){
+    public String deleteUser(Model model,String id){
         Integer uid = Integer.parseInt(id);
         User user = userService.getById(uid);
         if (user.getRole().equals("teacher") || user.getRole().equals("tgroup")|| user.getRole().equals("editor")|| user.getRole().equals("reviewer")){
-
-            return "alert";
+            model.addAttribute("info","暂时不支持删除此类角色（教师、教研组、编辑、审核）！");
+            model.addAttribute("no","1");
+            return "error";
         }
         else if(user.getRole().equals("student")){
             examService.delByStuId(uid);
@@ -276,8 +295,8 @@ public class UserController {
             for (String temp:boxes){
                 Integer uid = Integer.parseInt(temp);
                 User user = userService.getById(uid);
-                if (user.getRole().equals("teacher") || user.getRole().equals("tgroup")|| user.getRole().equals("editor")|| user.getRole().equals("reviewer")){
-                    model.addAttribute("info","教师、编辑、审核、教研组不能删除!");
+                if (user.getRole().equals("teacher") || user.getRole().equals("group")|| user.getRole().equals("editor")|| user.getRole().equals("reviewer")){
+                    model.addAttribute("info","暂时不支持删除此类角色（教师、教研组、编辑、审核）！");
                     model.addAttribute("no","1");
                     return "error";
                 }
@@ -285,11 +304,11 @@ public class UserController {
                     examService.delByStuId(uid);
                     doService.delByStuId(uid);
                     teachService.delByStuId(uid);
+                    studentService.delByStuId(uid);
                 }
                 userService.delUser(uid);
             }
         }
-
         return "redirect:/user/login.do";
     }
 }

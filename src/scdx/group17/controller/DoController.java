@@ -120,10 +120,6 @@ public class DoController {
     @RequestMapping("/list.do")
     public String ListAll(Model model){
         List<Question> questions = questionService.questionList();
-        /*Map<String,Student> stringStudentMap = new HashMap<String, Student>();
-        for (Teach teach:teaches){
-            stringStudentMap.put(teach.getStu_id().toString(),studentService.getById(teach.getStu_id()));
-        }*/
         Map<String,User> stringUserMap = new HashMap<String, User>();
         for (Question temp:questions){
             stringUserMap.put(temp.getId().toString(),userService.getById(temp.getId()));
@@ -162,5 +158,23 @@ public class DoController {
         return "redirect:/user/login.do";
     }
 
-
+    @RequestMapping("/practice.do")
+    public String practice(Model model,HttpSession session,String step,String size){
+        Integer step1 = Integer.parseInt(step);
+        if (step.equals(size)){
+            model.addAttribute("info","您已刷完所有题目! ");
+            return "redirect:/user/login.do";
+        }
+        else {
+            List<Question> questions = questionService.questionList();
+            int c = questions.size();
+            Question question1 = questions.get(step1);
+            step1 = step1 +1;
+            model.addAttribute("qID",question1.getqID());
+            model.addAttribute("step",step1);
+            model.addAttribute("question",question1);
+            model.addAttribute("size",c);
+            return "practice";
+        }
+    }
 }

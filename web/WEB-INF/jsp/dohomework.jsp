@@ -122,10 +122,10 @@
                                         <hr />
                                         <div class="form-group">
                                             <div class="col-lg-offset-1 col-lg-9">
-                                                <c:if test="${step+1 eq size}">
+                                                <c:if test="${step eq size}">
                                                     <button type="submit" class="btn btn-success">提交</button>
                                                 </c:if>
-                                                <c:if test="${step+1 ne size}">
+                                                <c:if test="${step ne size}">
                                                     <button type="submit" class="btn btn-success">下一题</button>
                                                 </c:if>
                                             </div>

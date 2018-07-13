@@ -13,4 +13,6 @@ public interface TeacherMapper {
     public void addUser(@Param("id")Integer id,@Param("password")String password,@Param("gender")String gender,@Param("role")String role,@Param("name")String name,@Param("subject")String subject);
     public void updateUser(@Param("id")Integer id,@Param("password")String password,@Param("gender")String gender,@Param("role")String role,@Param("name")String name,@Param("subject")String subject);
     public List<Teacher> getAllTeachers();
+    public void delByTeacherId(@Param("id")Integer id);
+
 }

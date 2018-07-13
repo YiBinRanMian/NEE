@@ -37,4 +37,5 @@
         DELETE FROM question WHERE qID = #{qID}
     </select>
 
+
 </mapper>

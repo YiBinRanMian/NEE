@@ -81,12 +81,7 @@ DROP TABLE IF EXISTS `compose1`;
 CREATE TABLE `compose1` (
   `qID` int(11) NOT NULL,
   `id` int(11) NOT NULL,
-  `hID` int(11) NOT NULL,
-  PRIMARY KEY (`qID`,`id`,`hID`),
-  KEY `FK_compose1` (`qID`),
-  KEY `FK_compose2` (`id`,`hID`),
-  CONSTRAINT `FK_compose1` FOREIGN KEY (`qID`) REFERENCES `question` (`qID`),
-  CONSTRAINT `FK_compose2` FOREIGN KEY (`id`, `hID`) REFERENCES `homework` (`id`, `hID`)
+  `hID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,7 +91,7 @@ CREATE TABLE `compose1` (
 
 LOCK TABLES `compose1` WRITE;
 /*!40000 ALTER TABLE `compose1` DISABLE KEYS */;
-INSERT INTO `compose1` VALUES (4,10000,4),(4,10000,5),(5,10000,4),(6,10000,4),(7,10000,4),(8,10000,4),(9,10000,4),(10,10000,4),(11,10000,4),(12,10000,4),(13,10000,4),(14,10000,4),(14,10000,5),(15,10000,4),(16,10000,4),(17,10000,4),(18,10000,4),(19,10000,4),(20,10000,4),(21,10000,4),(22,10000,4),(23,10000,4),(23,10000,5),(25,10000,4),(26,10000,4),(27,10000,4),(31,10000,4);
+INSERT INTO `compose1` VALUES (4,10000,4),(4,10000,5),(4,10000,6),(5,10000,4),(6,10000,4),(7,10000,4),(8,10000,4),(9,10000,4),(10,10000,4),(11,10000,4),(12,10000,4),(13,10000,4),(14,10000,4),(14,10000,5),(15,10000,4),(16,10000,4),(17,10000,4),(18,10000,4),(19,10000,4),(20,10000,4),(21,10000,4),(22,10000,4),(23,10000,4),(23,10000,5),(25,10000,4),(26,10000,4),(27,10000,4),(31,10000,4),(5,31,7),(6,31,7),(7,31,7),(8,31,7),(9,31,7),(10,31,7),(11,31,7),(12,31,7),(13,31,7),(14,31,7),(15,31,7),(16,31,7),(17,31,7),(18,31,7),(19,31,7),(20,31,7),(21,31,7),(22,31,7),(23,31,7),(25,31,7),(26,31,7),(27,31,7),(28,31,7),(29,31,7),(30,31,7),(31,31,7);
 /*!40000 ALTER TABLE `compose1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +202,7 @@ CREATE TABLE `do` (
 
 LOCK TABLES `do` WRITE;
 /*!40000 ALTER TABLE `do` DISABLE KEYS */;
-INSERT INTO `do` VALUES (10000,4,2001,'2018-07-15 10:00:00',-1,'the 4th homework'),(10000,4,11111,'2018-07-15 10:00:00',0,'the 4th homework'),(10000,5,2001,'2018-07-15 10:00:00',-1,'5th'),(10000,5,11111,'2018-07-15 10:00:00',0,'5th');
+INSERT INTO `do` VALUES (31,7,111,'2018-07-15 10:00:00',0,'1st Homework'),(31,7,112,'2018-07-15 10:00:00',-1,'1st Homework'),(31,7,113,'2018-07-15 10:00:00',-1,'1st Homework'),(31,7,114,'2018-07-15 10:00:00',-1,'1st Homework'),(31,7,2001,'2018-07-15 10:00:00',-1,'1st Homework'),(10000,4,2001,'2018-07-15 10:00:00',-1,'the 4th homework'),(10000,4,11111,'2018-07-15 10:00:00',0,'the 4th homework'),(10000,5,2001,'2018-07-15 10:00:00',-1,'5th'),(10000,5,11111,'2018-07-15 10:00:00',0,'5th'),(10000,6,2001,'2018-07-15 10:00:00',-1,'????????'),(10000,6,11111,'2018-07-15 10:00:00',0,'????????');
 /*!40000 ALTER TABLE `do` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +258,7 @@ CREATE TABLE `exam` (
 
 LOCK TABLES `exam` WRITE;
 /*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES (2001,2,4,'2018-09-01',-1,'12:00:00','1st test'),(10000,2,2,NULL,-1,NULL,'2nd'),(11111,2,3,'2018-09-01',0,'00:00:00','3rd'),(11111,2,4,'2018-09-01',6,'12:00:00','4th');
+INSERT INTO `exam` VALUES (2001,2,4,'2018-09-01',10,'12:00:00','1st test'),(10000,2,2,NULL,-1,NULL,'2nd'),(11111,2,3,'2018-09-01',0,'00:00:00','3rd'),(11111,2,4,'2018-09-01',6,'12:00:00','4th');
 /*!40000 ALTER TABLE `exam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,7 +439,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (2001,'123','female','student','Katty'),(11111,'123','male','student','关七号');
+INSERT INTO `student` VALUES (111,'123','male','student','Abey'),(112,'123','female','student','Brody'),(113,'123','female','student','Candy'),(114,'123','male','student','Danial'),(2001,'123','male','student','Katty'),(11111,'1234','female','student','关七号');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -467,7 +462,7 @@ CREATE TABLE `teach` (
 
 LOCK TABLES `teach` WRITE;
 /*!40000 ALTER TABLE `teach` DISABLE KEYS */;
-INSERT INTO `teach` VALUES (11111,10000),(11111,10002),(2001,10000),(11111,1103);
+INSERT INTO `teach` VALUES (11111,10000),(11111,10002),(2001,10000),(11111,1103),(111,31),(112,31),(113,31),(114,31),(2001,31);
 /*!40000 ALTER TABLE `teach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -496,7 +491,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1103,'123','male','teacher','how','Math'),(10000,'123','female','teacher','major','English'),(10002,'123','女','teacher','李金恒','风力学');
+INSERT INTO `teacher` VALUES (31,'123','female','teacher','Jack','English'),(1103,'123','male','teacher','how','Math'),(10000,'123','female','teacher','major','English'),(10002,'123','女','teacher','李金恒','风力学');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -576,7 +571,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'123','male','useradmin','Tom',NULL),(2,'123','male','group','Jackson',''),(4,'2',NULL,'teacher','hasxwzl',NULL),(12,'123456','male','group','李哲睿',NULL),(1103,'123','male','teacher','how','Math'),(2001,'1234','female','student','Katty',NULL),(10000,'123','female','teacher','major','MATH'),(10001,'123','female','editor','李四',NULL),(10002,'123','female','teacher','李金恒','风力学'),(10003,'123','female','reviewer','关九号',NULL),(11111,'123','male','student','关七号',NULL);
+INSERT INTO `user` VALUES (1,'123','male','useradmin','Tom',NULL),(2,'123','male','group','Jackson',''),(4,'2',NULL,'teacher','hasxwzl',NULL),(12,'123456','male','group','李哲睿',NULL),(31,'123','female','teacher','Jack',NULL),(111,'123','male','student','Abey',''),(112,'123','female','student','Brody',''),(113,'123','female','student','Candy',''),(114,'123','male','student','Danial',''),(1103,'123','male','teacher','how','Math'),(2001,'123','male','student','Katty',NULL),(10000,'123','female','teacher','major','MATH'),(10001,'123','female','editor','李四',NULL),(10002,'123','female','teacher','李金恒','风力学'),(10003,'123','female','reviewer','关九号',NULL),(11111,'1234','female','student','关七号',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -589,4 +584,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-13 10:56:33
+-- Dump completed on 2018-07-13 16:28:38

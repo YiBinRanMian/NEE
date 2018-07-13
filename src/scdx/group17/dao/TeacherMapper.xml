@@ -23,4 +23,7 @@
     <select id="getAllTeachers" resultMap="TeacherResultMap">
         SELECT * FROM teacher
     </select>
+    <select id="delByTeacherId" parameterType="scdx.group17.entity.Teacher">
+        DELETE FROM teacher WHERE id = #{id}
+    </select>
 </mapper>

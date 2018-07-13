@@ -37,6 +37,7 @@
             </li>
             <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 作业考试 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
                 <ul>
+                    <li><a href="${pageContext.request.contextPath}/homeworks/practice.do?&step=0">在线练习</a></li>
                     <li><a href="${pageContext.request.contextPath}/homeworks/gethomeworks.do?&query=&id=${one.id}">家庭作业</a></li>
                     <li><a href="${pageContext.request.contextPath}/test/tests.do?&query=&id=${one.id}">考试</a></li>
                 </ul>

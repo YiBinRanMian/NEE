@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import scdx.group17.entity.News;
 import scdx.group17.entity.User;
-import scdx.group17.service.EditorService;
 import scdx.group17.service.NewsService;
 import scdx.group17.service.UserService;
 
@@ -22,8 +21,6 @@ import java.util.Map;
 public class NewsController {
     @Autowired
     private NewsService newsService;
-    @Autowired
-    private EditorService editorService;
     @Autowired
     private UserService userService;
     @RequestMapping("/list.do")

@@ -19,4 +19,5 @@ public interface QuestionMapper {
     public void addJudge(@Param("id")Integer id,@Param("category")String category,@Param("type")String type,@Param("title")String title,@Param("answer")String answer,@Param("score")Integer score);
 
     public void delByQid(@Param("qID")Integer qID);
+
 }
