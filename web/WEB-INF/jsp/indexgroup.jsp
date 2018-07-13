@@ -44,7 +44,7 @@
 
         function delrow(){
             var cGetRow = window.event.srcElement.parentElement.parentElement.rowIndex;
-            userlist.deleteRow(cGetRow);
+            questionlist.deleteRow(cGetRow);
 
         }
 
