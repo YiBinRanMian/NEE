@@ -15,8 +15,7 @@
 		<content url="file://$MODULE_DIR$">
       			<sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       			<excludeFolder url="file://$MODULE_DIR$/target" />
-    		</content>
-	没有则添加
+    	</content>,没有则添加
 	
 	contact: friedchickenkai@gmail.com
 
