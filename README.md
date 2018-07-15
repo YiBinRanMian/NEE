@@ -1,4 +1,4 @@
-网络应急化教育平台
+网络应急化教育平台  www.friedchickenkai.com
 ----------------------------------------------------------------------------
 	移民手册
 	1. 创建 Spring mvc 工程
@@ -19,3 +19,4 @@
 	
 	contact: friedchickenkai@gmail.com
 
+	
